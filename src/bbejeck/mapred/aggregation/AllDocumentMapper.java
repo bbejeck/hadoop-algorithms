@@ -15,7 +15,6 @@ import java.util.StringTokenizer;
  * User: Bill Bejeck
  * Date: 9/11/12
  * Time: 9:59 PM
- *
  */
 public class AllDocumentMapper extends Mapper<LongWritable,Text,Text,IntWritable> {
 
