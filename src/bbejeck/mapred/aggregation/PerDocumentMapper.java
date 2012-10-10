@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
  * Date: 9/11/12
  * Time: 8:57 PM
  */
-public class PerLineMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+public class PerDocumentMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {

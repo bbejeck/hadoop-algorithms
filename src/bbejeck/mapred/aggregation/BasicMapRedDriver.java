@@ -20,7 +20,7 @@ public class BasicMapRedDriver {
         if (args[0].equalsIgnoreCase("per")) {
             doMapReduce(job, args[1], PerTokenMapper.class, "per-token", "PerTokenCount");
         }else if(args[0].equalsIgnoreCase("doc")){
-            doMapReduce(job,args[1],PerLineMapper.class,"per-document","PerDocCount");
+            doMapReduce(job,args[1],PerDocumentMapper.class,"per-document","PerDocCount");
         }else if(args[0].equalsIgnoreCase("all")){
             doMapReduce(job,args[1],AllDocumentMapper.class,"all-document","AllDocCount");
         }else if(args[0].equalsIgnoreCase("comb")){
