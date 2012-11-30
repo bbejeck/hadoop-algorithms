@@ -18,14 +18,14 @@ public class PairsOccurrenceMapper extends Mapper<LongWritable, Text, WordPair, 
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-        int numberNeighbors = context.getConfiguration().getInt("neighbors", 2);
+        int neighbors = context.getConfiguration().getInt("neighbors", 2);
         String[] tokens = value.toString().split("\\s+");
         if (tokens.length > 1) {
             for (int i = 0; i < tokens.length; i++) {
                 wordPair.setWord(tokens[i]);
 
-                int start = (i - numberNeighbors < 0) ? 0 : i - numberNeighbors;
-                int end = (i + numberNeighbors >= tokens.length) ? tokens.length - 1 : i + numberNeighbors;
+                int start = (i - neighbors < 0) ? 0 : i - neighbors;
+                int end = (i + neighbors >= tokens.length) ? tokens.length - 1 : i + neighbors;
                 for (int j = start; j <= end; j++) {
                     if (j == i) continue;
                     wordPair.setNeighbor(tokens[j]);
