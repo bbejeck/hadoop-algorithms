@@ -33,12 +33,17 @@ public class WordPair implements Writable,WritableComparable<WordPair> {
     }
 
     @Override
-    public int compareTo(WordPair wordPair) {
-        int returnVal = this.word.compareTo(wordPair.getWord());
+    public int compareTo(WordPair other) {
+        int returnVal = this.word.compareTo(other.getWord());
         if(returnVal != 0){
             return returnVal;
         }
-        return this.neighbor.compareTo(wordPair.getNeighbor());
+        if(this.neighbor.toString().equals("*")){
+            return -1;
+        }else if(other.getNeighbor().toString().equals("*")){
+            return 1;
+        }
+        return this.neighbor.compareTo(other.getNeighbor());
     }
 
     public static WordPair read(DataInput in) throws IOException {
@@ -81,7 +86,7 @@ public class WordPair implements Writable,WritableComparable<WordPair> {
     @Override
     public int hashCode() {
         int result = word != null ? word.hashCode() : 0;
-        result = 31 * result + (neighbor != null ? neighbor.hashCode() : 0);
+        result = 163 * result + (neighbor != null ? neighbor.hashCode() : 0);
         return result;
     }
 
