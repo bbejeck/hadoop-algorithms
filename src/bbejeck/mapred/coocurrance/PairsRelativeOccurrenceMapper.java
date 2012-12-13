@@ -17,25 +17,30 @@ public class PairsRelativeOccurrenceMapper extends Mapper<LongWritable, Text, Wo
     private IntWritable ONE = new IntWritable(1);
     private IntWritable totalCount = new IntWritable();
 
-
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         int neighbors = context.getConfiguration().getInt("neighbors", 2);
         String[] tokens = value.toString().split("\\s+");
         if (tokens.length > 1) {
             for (int i = 0; i < tokens.length; i++) {
-                wordPair.setWord(tokens[i]);
+                    tokens[i] = tokens[i].replaceAll("\\W+","");
 
-                int start = (i - neighbors < 0) ? 0 : i - neighbors;
-                int end = (i + neighbors >= tokens.length) ? tokens.length - 1 : i + neighbors;
-                for (int j = start; j <= end; j++) {
-                    if (j == i) continue;
-                    wordPair.setNeighbor(tokens[j]);
-                    context.write(wordPair, ONE);
-                }
-                wordPair.setNeighbor("*");
-                totalCount.set(end - start);
-                context.write(wordPair, totalCount);
+                    if(tokens[i].equals("")){
+                        continue;
+                    }
+
+                    wordPair.setWord(tokens[i]);
+
+                    int start = (i - neighbors < 0) ? 0 : i - neighbors;
+                    int end = (i + neighbors >= tokens.length) ? tokens.length - 1 : i + neighbors;
+                    for (int j = start; j <= end; j++) {
+                        if (j == i) continue;
+                        wordPair.setNeighbor(tokens[j].replaceAll("\\W",""));
+                        context.write(wordPair, ONE);
+                    }
+                    wordPair.setNeighbor("*");
+                    totalCount.set(end - start);
+                    context.write(wordPair, totalCount);
             }
         }
     }

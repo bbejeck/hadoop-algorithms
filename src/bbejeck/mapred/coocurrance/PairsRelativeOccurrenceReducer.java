@@ -14,19 +14,24 @@ import java.io.IOException;
  */
 public class PairsRelativeOccurrenceReducer extends Reducer<WordPair, IntWritable, WordPair, DoubleWritable> {
     private DoubleWritable totalCount = new DoubleWritable();
-    private int totalWordCount = 1;
+    private DoubleWritable relativeCount = new DoubleWritable();
     private Text currentWord = new Text("NOT_SET");
     private Text flag = new Text("*");
 
     @Override
     protected void reduce(WordPair key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
-        if (key.getNeighbor().equals(flag) && !key.getWord().equals(currentWord)) {
-            currentWord = key.getWord();
-            totalWordCount = getTotalCount(values);
+        if (key.getNeighbor().equals(flag)) {
+            if (key.getWord().equals(currentWord)) {
+                totalCount.set(totalCount.get() + getTotalCount(values));
+            } else {
+                currentWord.set(key.getWord());
+                totalCount.set(0);
+                totalCount.set(getTotalCount(values));
+            }
         } else {
             int count = getTotalCount(values);
-            totalCount.set((double)count/totalWordCount);
-            context.write(key, totalCount);
+            relativeCount.set((double) count / totalCount.get());
+            context.write(key, relativeCount);
         }
 
     }

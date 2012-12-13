@@ -28,9 +28,10 @@ public class PairsRelativeOccurrenceReducerTest {
                 .withReducer(reducer)
                 .withInput(new WordPair("apple", "*"), allCounts)
                 .runTest();
-        Field f = reducer.getClass().getDeclaredField("totalWordCount");
+        Field f = reducer.getClass().getDeclaredField("totalCount");
         f.setAccessible(true);
-        assertThat((Integer) f.get(reducer), is(4));
+        DoubleWritable dw = (DoubleWritable)f.get(reducer);
+        assertThat(dw.get(), is((double)4));
 
         f = reducer.getClass().getDeclaredField("currentWord");
         f.setAccessible(true);
@@ -40,14 +41,18 @@ public class PairsRelativeOccurrenceReducerTest {
     }
 
     @Test
-    public void testReduce() {
+    public void testReduce() throws Exception {
         List<IntWritable> counts = new ArrayList<IntWritable>();
         counts.add(new IntWritable(2));
-
+        PairsRelativeOccurrenceReducer reducer = new PairsRelativeOccurrenceReducer();
+        Field f = reducer.getClass().getDeclaredField("totalCount");
+        f.setAccessible(true);
+        DoubleWritable dw = (DoubleWritable)f.get(reducer);
+        dw.set(2);
         new ReduceDriver<WordPair, IntWritable, WordPair, DoubleWritable>()
-                .withReducer(new PairsRelativeOccurrenceReducer())
+                .withReducer(reducer)
                 .withInput(new WordPair("apple", "nut"), counts)
-                .withOutput(new WordPair("apple", "nut"), new DoubleWritable(2.0))
+                .withOutput(new WordPair("apple", "nut"), new DoubleWritable(1.0))
                 .runTest();
     }
 }
