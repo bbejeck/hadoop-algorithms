@@ -1,20 +1,25 @@
 package bbejeck.mapred.secondary;
 
-import org.apache.hadoop.io.Text;
-
-import java.util.Comparator;
+import org.apache.hadoop.io.WritableComparable;
+import org.apache.hadoop.io.WritableComparator;
 
 /**
  * User: Bill Bejeck
  * Date: 1/7/13
  * Time: 11:00 PM
  */
-public class YearMonthGroupingComparator implements Comparator<TemperaturePair> {
+public class YearMonthGroupingComparator extends WritableComparator {
+
+
+    public YearMonthGroupingComparator() {
+        super(TemperaturePair.class, true);
+    }
+
 
     @Override
-    public int compare(TemperaturePair temperaturePair, TemperaturePair temperaturePair2) {
-        Text yearMonth1 = temperaturePair.getYearMonth();
-        Text yearMonth2 = temperaturePair2.getYearMonth();
-        return yearMonth1.compareTo(yearMonth2);
+    public int compare(WritableComparable tp1, WritableComparable tp2) {
+        TemperaturePair temperaturePair = (TemperaturePair) tp1;
+        TemperaturePair temperaturePair2 = (TemperaturePair) tp2;
+        return temperaturePair.getYearMonth().compareTo(temperaturePair2.getYearMonth());
     }
 }
