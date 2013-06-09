@@ -16,7 +16,7 @@ import org.junit.Test;
 public class AllDocumentMapperTest {
 
    @Test
-   public void testProcessWordCounts(){
+   public void testProcessWordCounts() throws Exception{
        Text text = new Text("foo bar bar baz bar foo");
        new MapDriver<LongWritable,Text,Text,IntWritable>()
                .withMapper(new AllDocumentMapper())

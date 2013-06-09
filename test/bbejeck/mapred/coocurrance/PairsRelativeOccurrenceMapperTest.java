@@ -16,7 +16,7 @@ public class PairsRelativeOccurrenceMapperTest {
     private IntWritable one = new IntWritable(1);
     private IntWritable two = new IntWritable(2);
     @Test
-    public void testMapper(){
+    public void testMapper() throws Exception {
         new MapDriver<LongWritable, Text, WordPair, IntWritable>()
                 .withMapper(new PairsRelativeOccurrenceMapper())
                 .withInput(new LongWritable(1l),new Text("Ally Emmy Brady"))

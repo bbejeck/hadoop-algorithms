@@ -25,7 +25,7 @@ public class SecondarySortingTemperatureMapperTest {
             "0029029070999991901010406004+64333+023450FM-12+000599999V0209991C000019999999N0000001N9-00331+99999102311ADDGF108991999999999999999999"};
 
     @Test
-    public void testMap() {
+    public void testMap() throws Exception {
         new MapDriver<LongWritable, Text, TemperaturePair, NullWritable>()
                 .withMapper(new SecondarySortingTemperatureMapper())
                 .withInput(new LongWritable(1), new Text(temps[0]))

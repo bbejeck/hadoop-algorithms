@@ -16,7 +16,7 @@ import java.util.List;
 public class AverageTemperatureCombinerTest {
 
     @Test
-    public void testCombiner(){
+    public void testCombiner() throws Exception {
         List<TemperatureAveragingPair> pairList = new ArrayList<TemperatureAveragingPair>();
         pairList.add(new TemperatureAveragingPair(-78,1));
         pairList.add(new TemperatureAveragingPair(-84,1));

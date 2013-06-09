@@ -33,7 +33,7 @@ public class AverageTemperatureCombiningMapperTest {
     }
 
     @Test
-    public void testMapLeadingPlus() {
+    public void testMapLeadingPlus() throws Exception{
         new MapDriver<LongWritable, Text, Text, TemperatureAveragingPair>()
                 .withMapper(new AverageTemperatureCombiningMapper())
                 .withInput(new LongWritable(1), new Text(temps[1]))
@@ -42,7 +42,7 @@ public class AverageTemperatureCombiningMapperTest {
     }
 
     @Test
-    public void testMapNoValue() {
+    public void testMapNoValue() throws Exception {
         new MapDriver<LongWritable, Text, Text, TemperatureAveragingPair>()
                 .withMapper(new AverageTemperatureCombiningMapper())
                 .withInput(new LongWritable(1), new Text(temps[2]))

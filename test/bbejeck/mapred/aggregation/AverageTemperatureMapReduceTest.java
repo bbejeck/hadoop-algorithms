@@ -25,7 +25,7 @@ public class AverageTemperatureMapReduceTest {
 
 
     @Test
-    public void testMapReduce() {
+    public void testMapReduce() throws Exception {
 
         new MapReduceDriver<LongWritable, Text, Text, TemperatureAveragingPair, Text, IntWritable>()
                 .withMapper(new AverageTemperatureMapper())
@@ -45,7 +45,7 @@ public class AverageTemperatureMapReduceTest {
     }
 
     @Test
-    public void testMapReduceNoCombiner() {
+    public void testMapReduceNoCombiner() throws Exception {
 
         new MapReduceDriver<LongWritable, Text, Text, TemperatureAveragingPair, Text, IntWritable>()
                 .withMapper(new AverageTemperatureMapper())

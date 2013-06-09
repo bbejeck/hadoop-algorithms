@@ -17,7 +17,7 @@ public class AverageTemperatureReducerTest {
 
 
     @Test
-    public void testReducerCold(){
+    public void testReducerCold() throws Exception {
         List<TemperatureAveragingPair> pairList = new ArrayList<TemperatureAveragingPair>();
         pairList.add(new TemperatureAveragingPair(-78,1));
         pairList.add(new TemperatureAveragingPair(-84,1));

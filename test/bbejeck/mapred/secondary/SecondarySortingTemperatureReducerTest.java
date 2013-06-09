@@ -17,7 +17,7 @@ import java.util.List;
 public class SecondarySortingTemperatureReducerTest {
 
     @Test
-    public void testReducerCold() {
+    public void testReducerCold() throws Exception {
         List<NullWritable> list = new ArrayList<NullWritable>();
         list.add(NullWritable.get());
         new ReduceDriver<TemperaturePair, NullWritable, Text, IntWritable>()

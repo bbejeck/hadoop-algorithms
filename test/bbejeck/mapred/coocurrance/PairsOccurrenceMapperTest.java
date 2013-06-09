@@ -16,7 +16,7 @@ public class PairsOccurrenceMapperTest {
     private IntWritable one = new IntWritable(1);
 
     @Test
-    public void testMapValidInput(){
+    public void testMapValidInput() throws Exception {
         String text1 = "The quick        brown                   fox           jumped over the lazy dog";
         new MapDriver<LongWritable,Text,WordPair,IntWritable>()
                .withMapper(new PairsOccurrenceMapper())
@@ -60,7 +60,7 @@ public class PairsOccurrenceMapperTest {
 
 
     @Test
-    public void testOneTokenInput(){
+    public void testOneTokenInput() throws Exception {
         new MapDriver<LongWritable,Text,WordPair,IntWritable>()
             .withMapper(new PairsOccurrenceMapper())
             .withInput(new LongWritable(1l),new Text("Foo    "))
@@ -68,7 +68,7 @@ public class PairsOccurrenceMapperTest {
     }
 
     @Test
-    public void testAllWhitespaceInput(){
+    public void testAllWhitespaceInput() throws Exception {
         new MapDriver<LongWritable,Text,WordPair,IntWritable>()
                 .withMapper(new PairsOccurrenceMapper())
                 .withInput(new LongWritable(1l),new Text("                  " +

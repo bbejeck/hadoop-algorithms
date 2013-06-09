@@ -19,7 +19,7 @@ public class StripesReducerTest {
     private Text foo = new Text("foo");
     private Text bar = new Text("bar");
     @Test
-    public void testReducer(){
+    public void testReducer() throws Exception {
         MapWritable map = new MapWritable();
         map.put(foo,new IntWritable(2));
         map.put(bar,new IntWritable(2));

@@ -17,7 +17,7 @@ public class PairsReducerTest {
     private PairsReducer reducer = new PairsReducer();
 
     @Test
-    public void testReducer(){
+    public void testReducer() throws Exception {
         List<IntWritable> counts = new ArrayList<IntWritable>();
         counts.add(new IntWritable(1));
         counts.add(new IntWritable(1));

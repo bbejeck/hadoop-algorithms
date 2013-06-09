@@ -40,7 +40,7 @@ public class StripesOccurrenceMapperTest {
     }
 
     @Test
-    public void testMap(){
+    public void testMap() throws Exception {
         new MapDriver<LongWritable,Text,Text,MapWritable>()
                 .withMapper(new StripesOccurrenceMapper())
                 .withInput(key,text)
